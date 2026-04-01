@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +23,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+html,
+body,
+:root {
+  height: 100%;
+  background-color: black;
+  color-scheme: dark;
 }
