@@ -8,17 +8,19 @@ import Box from "./Box";
 import SidebarItem from "./Sidebaritem";
 import Library from "./Library";
 import { Song } from "@/types";
+import usePlayer from "@/hooks/usePlayer";
 
 interface SidebarProps {
   children: React.ReactNode;
   songs: Song[]
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ 
+const Sidebar: React.FC<SidebarProps> = ({
   children,
-  songs 
+  songs
 }) => {
   const pathname = usePathname();
+  const player = usePlayer();
 
   const routes = useMemo(
     () => [
@@ -39,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   );
 
   return (
-    <div className="flex h-full">
+    <div className={`flex h-full ${player.activeId ? 'pb-20' : ''}`}>
       <div className="hidden md:flex flex-col gap-y-2 bg-black h-full w-75 p-2">
         <Box>
           <div className="flex flex-col gap-y-4 px-5 py-4">

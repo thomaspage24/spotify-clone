@@ -3,6 +3,8 @@
 import useAuthModal from "@/hooks/useAuthModal";
 import useUploadModal from "@/hooks/useUploadModal";
 import { useUser } from "@/hooks/useUser";
+import usePlayer from "@/hooks/usePlayer";
+import { Song } from "@/types";
 
 import { AiOutlinePlus } from "react-icons/ai";
 import { TbPlaylist } from "react-icons/tb";
@@ -17,6 +19,7 @@ const Library: React.FC<LibraryProps> = ({
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
   const { user } = useUser();
+  const player = usePlayer();
 
   const onClick = () => {
     if (!user) {
@@ -77,10 +80,13 @@ const Library: React.FC<LibraryProps> = ({
 
       ">
         {songs.map((item) => (
-          <MediaItem 
-            onClick={() => {}}
+          <MediaItem
             key={item.id}
             data={item}
+            onClick={(id) => {
+              const song = songs.find((s) => s.id === id);
+              if (song) player.setActiveSong(song, songs);
+            }}
           />
         ))} 
 

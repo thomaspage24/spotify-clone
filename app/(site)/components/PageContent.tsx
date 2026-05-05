@@ -2,6 +2,7 @@
 
 import SongItem from "@/components/SongItem";
 import { Song } from "@/types";
+import usePlayer from "@/hooks/usePlayer";
 
 
 interface PageContentProps {
@@ -11,6 +12,8 @@ interface PageContentProps {
 const PageContent: React.FC<PageContentProps> = ({
     songs
 }) => {
+    const player = usePlayer();
+
     if (songs.length === 0) {
         return (
             <div className="mt-4 text-neutral-400">
@@ -33,13 +36,16 @@ const PageContent: React.FC<PageContentProps> = ({
             "
         >
             {songs.map((item) => (
-                <SongItem 
+                <SongItem
                     key={item.id}
-                    onClick={() => {}}
+                    onClick={(id) => {
+                        const song = songs.find((s) => s.id === id);
+                        if (song) player.setActiveSong(song, songs);
+                    }}
                     data={item}
                     />
             ))}
-        
+
         </div>
     );
 }
